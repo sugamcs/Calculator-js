@@ -34,5 +34,24 @@ function operate(num1,num2,operator){
         }
 }
 
+
 const result = operate(5, 3, '/'); 
 console.log(result);
+
+
+
+// Create the functions that populate the display when you click the number buttons.
+//  You should be storing the ‘display value’ in a variable somewhere for use in the next step.
+
+
+
+const digits = document.querySelectorAll('.digit');
+console.log(digits)
+
+function populateDisplay(key){
+    digits.forEach(digit => {
+
+    })
+    
+
+}

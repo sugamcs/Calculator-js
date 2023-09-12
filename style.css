@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.calculator {
+    background-color: #333;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    width: 665px;
+
+}
+
+.display {
+    background-color: #444;
+    color: #fff;
+    padding: 15px;
+    text-align: right;
+    font-size: 44px;
+    border-radius: 20px 20px 0 0;
+}
+
+#output {
+    width: 100%;
+    border: none;
+    background-color: #444;
+    color: #fff;
+    font-size: 34px;
+    text-align: right;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 10px;
+}
+
+button {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    padding: 25px;
+    cursor: pointer;
+}
+
+.digit {
+    grid-column: span 1;
+    height: 122px;
+    font-size: 35px;
+}
+
+/* make a shadow transition on hovering */
+.digit:hover, .operation:hover{
+    background-color: #828080;
+}
+
+.operation {
+    grid-column: span 1;
+    background-color: #543d78;
+    color: rgb(217, 255, 0);
+    height: 122px;
+    font-weight: 900;
+    font-size: 40px;
+}
+
+#zero {
+    grid-column: span 2;
+}
+
+.equals {
+    grid-column: span 2;
+    background-color: #2a9d8f;
+
+}
+
+.clear {
+    grid-column: span 2;
+    font-size: 45px;
+}
+.clear:hover{
+    background-color:  #828080 ;
+}
+#equals {
+    grid-column: span 2;
+}
