@@ -46,12 +46,14 @@ console.log(result);
 
 
 const digits = document.querySelectorAll('.digit');
-console.log(digits)
-
-function populateDisplay(key){
+function populateDisplay(){
     digits.forEach(digit => {
+        digit.addEventListener('click', event => {
+            const keyPressed = event.target;
+            const displayText = document.querySelector('.display');
+            displayText.textContent += keyPressed.textContent        
 
+        })
     })
-    
-
 }
+console.log(populateDisplay())
