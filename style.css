@@ -84,8 +84,8 @@ button {
 
 }
 
-.clear {
-    grid-column: span 2;
+.clear, .delete {
+    grid-column: span 1;
     font-size: 45px;
 }
 .clear:hover{
