@@ -1,3 +1,5 @@
+// operations
+
 function add(a,b){
     return a + b
 }
@@ -15,11 +17,12 @@ function divide(a,b){
     return (a/b).toFixed(1)
 }
 
+
 let num1;
 let num2;
 let operator;
 
-
+// Operater
 function operate(num1,num2,operator){
     if (operator === '+') {
             return add(num1, num2);
@@ -35,25 +38,37 @@ function operate(num1,num2,operator){
 }
 
 
-const result = operate(5, 3, '/'); 
-console.log(result);
-
-
-
-// Create the functions that populate the display when you click the number buttons.
-//  You should be storing the ‘display value’ in a variable somewhere for use in the next step.
-
-
 
 const digits = document.querySelectorAll('.digit');
+const equals = document.querySelector('#equals');
+const operations = document.querySelectorAll('.operation');
+
+
+
 function populateDisplay(){
     digits.forEach(digit => {
         digit.addEventListener('click', event => {
             const keyPressed = event.target;
             const displayText = document.querySelector('.display');
-            displayText.textContent += keyPressed.textContent        
+            let text1 = displayText.textContent += keyPressed.textContent;
+            if(operations.addEventListener('click',event =>{
+                text1 = num1;
+                const newDisplayText = displayText.textContent('')
+                let text2 = newDisplayText += event.target
 
+            
+            
+
+            
+
+
+        
+        
+    
+            }))
+        }else{
+            pass
         })
     })
 }
-console.log(populateDisplay())
+populateDisplay()
