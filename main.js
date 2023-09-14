@@ -58,7 +58,7 @@ function populateDisplay(){
 
             
             
-
+//progress
             
 
 
@@ -66,8 +66,7 @@ function populateDisplay(){
         
     
             }))
-        }else{
-            pass
+        }
         })
     })
 }
