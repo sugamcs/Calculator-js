@@ -72,3 +72,34 @@ function populateDisplay(){
     })
 }
 populateDisplay()
+operations.forEach(operation => {
+    operation.addEventListener('click', event => {
+        const operator = event.target.textContent;
+
+        // Check if the operator is '='
+        if (operator === '=') {
+            // Perform the operation when '=' is clicked
+            secondNumber = currentInput;
+            const result = operate(firstNumber, secondNumber, currentOperator);
+            displayText.textContent = result;
+            // Reset variables for the next operation
+            firstNumber = result;
+            secondNumber = '';
+            currentOperator = '';
+            currentInput = result;
+        } else if (operator === 'C') {
+            // Handle clear button, reset all variables
+            firstNumber = '';
+            secondNumber = '';
+            currentOperator = '';
+            currentInput = '';
+            displayText.textContent = '';
+        } else {
+            // Handle other operators (+, -, *, /)
+            // Store the first number, operator, and clear currentInput
+            firstNumber = currentInput;
+            currentOperator = operator;
+            currentInput = '';
+        }
+    });
+});
