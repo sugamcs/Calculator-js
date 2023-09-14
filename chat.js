@@ -1,119 +1,105 @@
-const digits = document.querySelectorAll('.digit');
-const operators = document.querySelectorAll('.operation');
-const clearButton = document.querySelector('.clear');
-const equalsButton = document.querySelector('.equals');
-const displayText = document.querySelector('.display');
+// // operations
 
-let firstNumber = '';
-let operator = '';
-let secondNumber = '';
-let currentInput = '';
-let calculationInProgress = false;
+// function add(a,b){
+//     return a + b
+// }
 
-// Helper function to perform basic operations
-function operate(a, b, op) {
-    a = parseFloat(a);
-    b = parseFloat(b);
-    switch (op) {
-        case '+':
-            return a + b;
-        case '-':
-            return a - b;
-        case '*':
-            return a * b;
-        case '/':
-            if (b === 0) return 'Error: Divide by zero';
-            return a / b;
-        default:
-            return 'Error: Invalid operator';
-    }
-}
+// function subtract(a,b){
+//     return a - b
+// }
 
-// Update display function
-function updateDisplay() {
-    if (calculationInProgress) {
-        displayText.textContent = firstNumber + ' ' + operator + ' ' + secondNumber;
-    } else {
-        displayText.textContent = firstNumber;
-    }
-}
+// function multiply(a,b){
+//     return a * b
+// }
 
-// Event listener for digit buttons
-digits.forEach(digit => {
-    digit.addEventListener('click', event => {
-        const keyPressed = event.target.textContent;
-        if (operator === '') {
-            currentInput += keyPressed;
-        } else {
-            currentInput = keyPressed;
-        }
-        if (calculationInProgress) {
-            secondNumber = currentInput;
-        } else {
-            firstNumber = currentInput;
-        }
-        updateDisplay();
-    });
-});
+// function divide(a,b){
 
-// Event listener for operator buttons
-operators.forEach(opBtn => {
-    opBtn.addEventListener('click', event => {
-        if (currentInput !== '') {
-            if (firstNumber === '') {
-                firstNumber = currentInput;
-            } else if (operator !== '') {
-                firstNumber = operate(firstNumber, secondNumber, operator)
-                secondNumber = '';
-            }
-            operator = event.target.textContent;
-            currentInput = '';
-            calculationInProgress = true;
-            updateDisplay();
-        }
-    });
-});
+//     return (a/b).toFixed(1)
+// }
 
-// Event listener for clear button
-clearButton.addEventListener('click', () => {
-    firstNumber = '';
-    operator = '';
-    secondNumber = '';
-    currentInput = '';
-    calculationInProgress = false;
-    displayText.textContent = '';
-});
 
-// Event listener for equals button
-equalsButton.addEventListener('click', () => {
-    if (firstNumber !== '' && operator !== '' && secondNumber !== '') {
-        const result = operate(firstNumber, secondNumber, operator);
-        if (result === 'Error: Divide by zero' || result === 'Error: Invalid operator') {
-            displayText.textContent = result.toString();
-        } else {
-            firstNumber = result.toString();
-            operator = '';
-            secondNumber = '';
-            currentInput = '';
-            calculationInProgress = false;
-            displayText.textContent = firstNumber;
-        }
-    }
-});
+// let num1;
+// let num2;
+// let operator;
 
-// Event listener for delete button
-function deleteChar() {
-    const deleteBtn = document.querySelector('.delete');
-    deleteBtn.addEventListener('click', () => {
-        // Get the current display text
-        let currentDisplay = displayText.textContent;
-        if (currentDisplay.length > 0) {
-            // Remove the last character
-            currentDisplay = currentDisplay.slice(0, -1);
-            // Update the display
-            displayText.textContent = currentDisplay;
-        }
-    });
-}
+// // Operater
+// function operate(num1,num2,operator){
+//     if (operator === '+') {
+//             return add(num1, num2);
+//         } else if (operator === '-') {
+//             return subtract(num1, num2);
+//         } else if (operator === '*') {
+//             return multiply(num1, num2);
+//         } else if (operator === '/') {
+//             return divide(num1, num2);
+//         } else {
+//             throw new Error(`Unsupported operator: ${operator}`);
+//         }
+// }
 
-deleteChar();
+
+
+// const digits = document.querySelectorAll('.digit');
+// const equals = document.querySelector('#equals');
+// const operations = document.querySelectorAll('.operation');
+
+
+
+// function populateDisplay(){
+//     digits.forEach(digit => {
+//         digit.addEventListener('click', event => {
+//             const keyPressed = event.target;
+//             const displayText = document.querySelector('.display');
+//             let text1 = displayText.textContent += keyPressed.textContent;
+//             if(operations.addEventListener('click',event =>{
+//                 text1 = num1;
+//                 const newDisplayText = displayText.textContent('')
+//                 let text2 = newDisplayText += event.target
+
+            
+            
+
+            
+
+
+        
+        
+    
+//             }))
+//         }else{
+//             pass
+//         })
+//     })
+// }
+// populateDisplay()
+// operations.forEach(operation => {
+//     operation.addEventListener('click', event => {
+//         const operator = event.target.textContent;
+
+//         // Check if the operator is '='
+//         if (operator === '=') {
+//             // Perform the operation when '=' is clicked
+//             secondNumber = currentInput;
+//             const result = operate(firstNumber, secondNumber, currentOperator);
+//             displayText.textContent = result;
+//             // Reset variables for the next operation
+//             firstNumber = result;
+//             secondNumber = '';
+//             currentOperator = '';
+//             currentInput = result;
+//         } else if (operator === 'C') {
+//             // Handle clear button, reset all variables
+//             firstNumber = '';
+//             secondNumber = '';
+//             currentOperator = '';
+//             currentInput = '';
+//             displayText.textContent = '';
+//         } else {
+//             // Handle other operators (+, -, *, /)
+//             // Store the first number, operator, and clear currentInput
+//             firstNumber = currentInput;
+//             currentOperator = operator;
+//             currentInput = '';
+//         }
+//     });
+// });
