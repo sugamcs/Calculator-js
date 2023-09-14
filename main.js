@@ -70,22 +70,31 @@ populateDisplay()
 
 // i want to store num1 when an operator has been clicked
 
-function chadOperator() {
-    operations.forEach(operation =>{
+
+
+
+function storeNumOne() {
+    operations.forEach(operation => {
         operation.addEventListener('click', event => {
-
             let text1 = event.target;
-            if (text1.textContent === '+'){
-                let num1;
-                num1 = displayText;
-                console.log(num1)
-
-            }
-        })
-    })
-}
-           
-
+            if (text1.textContent === '+' || text1.textContent === '-' ||text1.textContent === '*'
+             ||text1.textContent === '/' ) {
+                num1 = parseFloat(displaySelector.textContent); 
+                displaySelector.textContent = `${operation.textContent}`
+                console.log(num1);
+                
+// now i want to make display empty while keeping the num1 saved
         
-console.log(chadOperator())
+            }
+        });
+    });
+}
 
+function actOnNums(){
+    
+}
+
+
+
+
+storeNumOne()
