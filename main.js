@@ -17,7 +17,7 @@ function divide(a,b){
     return (a/b).toFixed(1)
 }
 
-
+//declared variables
 let num1;
 let num2;
 let operator;
@@ -42,7 +42,7 @@ function operate(num1,num2,operator){
         }
 }
 
-
+// queryselectors
 const digits = document.querySelectorAll('.digit')
 const equals = document.querySelector('#equals');
 const operations = document.querySelectorAll('.operation');
@@ -63,38 +63,79 @@ function populateDisplay() {
       
 populateDisplay()
 
+// function storeNumOne() {
+//     operations.forEach(operation => {
+//         operation.addEventListener('click', event => {
+//             let text1 = event.target;
+//             if (e.target === '+' || text1.textContent === '-' ||text1.textContent === '*'
+//              ||e.target === '/' ) {
+                // num1 = parseFloat(displaySelector.textContent); 
+//                 displaySelector.textContent = ""
+//                 console.log(num1);
+                        
+//             }
+//         });
+//     });
+// }
 
-// store the first number and second number that are input into the calculator,
-// utilize the operator that the user selects, 
-// then operate() on the two numbers when user presses the “=” key.
 
-// i want to store num1 when an operator has been clicked
-
-
-
-
-function storeNumOne() {
-    operations.forEach(operation => {
-        operation.addEventListener('click', event => {
-            let text1 = event.target;
-            if (text1.textContent === '+' || text1.textContent === '-' ||text1.textContent === '*'
-             ||text1.textContent === '/' ) {
-                num1 = parseFloat(displaySelector.textContent); 
-                displaySelector.textContent = `${operation.textContent}`
-                console.log(num1);
-                
-// now i want to make display empty while keeping the num1 saved
-        
-            }
-        });
+digits.forEach(digit => {
+    digit.addEventListener("click", e => {
+        if (operator === "") { // Read first digit if no operator set yet
+            num1 += e.target.innerText;
+        } else if(e.target === '+' || e.target === '-' || e.target === '*'
+             ||e.target === '/' ) { // Read second digit
+            let newKeyPressed = e.target
+            displaySelector.textContent = ""
+            let newDisplayText = displaySelector.textContent += newKeyPressed
+            num2 = newDisplayText
+            return num2
+        }
     });
-}
+});
 
-function actOnNums(){
+operations.forEach(op => {
+    op.addEventListener("click", e => {
+        if (e.target.innerText !== "=") { // If the operator is not equals
+            operator = e.target.innerText;
+            num1 = parseFloat(displaySelector.textContent); 
+            displaySelector.textContent = ""
+            console.log(num1); // Print the first digit
+            console.log(operator); // Print the operator
+            let newKeyPressed = e.target
+            displaySelector.textContent = ""
+            let newDisplayText = displaySelector.textContent += newKeyPressed.textContent
+            num2 = newDisplayText.textContent
+            console.log(num2)
+           
+          } else { // If equals button clicked
+            console.log(num2); // Print 2nd digit
+
+            switch (operator) { // Calculate and print output
+                case "+":
+                    console.log(parseInt(num1) + parseInt(num2));
+                    break;
+
+                case "-":
+                    console.log(parseInt(num1) - parseInt(num2));
+                    break;
+
+                // etc...
+
+                default:
+                    break;
+            }
+        }
+    })
+})
+
+
+
+
+
+
     
-}
 
 
 
 
-storeNumOne()
