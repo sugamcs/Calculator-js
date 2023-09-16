@@ -1,141 +1,89 @@
-// operations
-
-function add(a,b){
-    return a + b
+function add(a, b) {
+  return a + b;
 }
 
-function subtract(a,b){
-    return a - b
+function subtract(a, b) {
+  return a - b;
 }
 
-function multiply(a,b){
-    return a * b
+function multiply(a, b) {
+  return a * b;
 }
 
-function divide(a,b){
-
-    return (a/b).toFixed(1)
+function divide(a, b) {
+  if (b === 0) {
+    return "Error, You can't divide by zero!";
+  }
+  return a / b;
 }
 
-//declared variables
-let num1;
-let num2;
-let operator;
-let displayText;
 
-
-
-
-// Operater Function:
-
-function operate(num1,num2,operator){
-    if (operator === '+') {
-            return add(num1, num2);
-        } else if (operator === '-') {
-            return subtract(num1, num2);
-        } else if (operator === '*') {
-            return multiply(num1, num2);
-        } else if (operator === '/') {
-            return divide(num1, num2);
-        } else {
-            throw new Error(`Unsupported operator: ${operator}`);
-        }
+function operate(operator, num1, num2) {
+  switch (operator) {
+    case "+":
+      return add(num1, num2);
+    case "-":
+      return subtract(num1, num2);
+    case "*":
+      return multiply(num1, num2);
+    case "/":
+      return divide(num1, num2);
+    default:
+      return "Error";
+  }
 }
 
-// queryselectors
-const digits = document.querySelectorAll('.digit')
-const equals = document.querySelector('#equals');
-const operations = document.querySelectorAll('.operation');
-const displaySelector = document.querySelector('.display')
 
+const display = document.getElementById("output");
+let currentInput = ""; 
+let currentOperator = ""; 
+let previousValue = null; 
 
-
-function populateDisplay() {
-    digits.forEach(digit => {
-        digit.addEventListener('click', event => {
-            const keyPressed = event.target;
-            let displayText = displaySelector.textContent += keyPressed.textContent
-            return displayText
-            })
-        })
+document.querySelectorAll(".digit").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (currentInput === "0") {
+      currentInput = "";
     }
-
-      
-populateDisplay()
-
-// function storeNumOne() {
-//     operations.forEach(operation => {
-//         operation.addEventListener('click', event => {
-//             let text1 = event.target;
-//             if (e.target === '+' || text1.textContent === '-' ||text1.textContent === '*'
-//              ||e.target === '/' ) {
-                // num1 = parseFloat(displaySelector.textContent); 
-//                 displaySelector.textContent = ""
-//                 console.log(num1);
-                        
-//             }
-//         });
-//     });
-// }
-
-
-digits.forEach(digit => {
-    digit.addEventListener("click", e => {
-        if (operator === "") { // Read first digit if no operator set yet
-            num1 += e.target.innerText;
-        } else if(e.target === '+' || e.target === '-' || e.target === '*'
-             ||e.target === '/' ) { // Read second digit
-            let newKeyPressed = e.target
-            displaySelector.textContent = ""
-            let newDisplayText = displaySelector.textContent += newKeyPressed
-            num2 = newDisplayText
-            return num2
-        }
-    });
+    currentInput += button.textContent;
+    display.value = currentInput;
+  });
 });
 
-operations.forEach(op => {
-    op.addEventListener("click", e => {
-        if (e.target.innerText !== "=") { // If the operator is not equals
-            operator = e.target.innerText;
-            num1 = parseFloat(displaySelector.textContent); 
-            displaySelector.textContent = ""
-            console.log(num1); // Print the first digit
-            console.log(operator); // Print the operator
-            let newKeyPressed = e.target
-            displaySelector.textContent = ""
-            let newDisplayText = displaySelector.textContent += newKeyPressed.textContent
-            num2 = newDisplayText.textContent
-            console.log(num2)
-           
-          } else { // If equals button clicked
-            console.log(num2); // Print 2nd digit
+document.querySelectorAll(".operation").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (currentInput !== "") {
+      if (previousValue === null) {
+        previousValue = parseFloat(currentInput);
+      } else {
+        previousValue = operate(currentOperator, previousValue, parseFloat(currentInput));
+      }
+      currentOperator = button.textContent;
+      currentInput = "";
+      display.value = previousValue;
+    }
+  });
+});
 
-            switch (operator) { // Calculate and print output
-                case "+":
-                    console.log(parseInt(num1) + parseInt(num2));
-                    break;
+document.getElementById("equals").addEventListener("click", () => {
+  if (currentInput !== "") {
+    previousValue = operate(currentOperator, previousValue, parseFloat(currentInput));
+    display.value = previousValue;
+    currentInput = "";
+    currentOperator = "";
+  }
+});
 
-                case "-":
-                    console.log(parseInt(num1) - parseInt(num2));
-                    break;
+document.querySelector(".clear").addEventListener("click", () => {
+  currentInput = "";
+  currentOperator = "";
+  previousValue = null;
+  display.value = "0";
+});
 
-                // etc...
-
-                default:
-                    break;
-            }
-        }
-    })
-})
-
-
-
-
-
-
-    
-
-
-
-
+document.querySelector(".delete").addEventListener("click", () => {
+  currentInput = currentInput.slice(0, -1); // Remove the last character
+  if (currentInput === "") {
+    currentInput = "0";
+  }
+  display.value = currentInput;
+});
